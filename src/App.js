@@ -1,25 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter, Route } from "react-router-dom";
+
+import Nav from "./components/Nav";
+import LandingPage from "./pages/landing-page/LandingPage";
+import RecipeDetails from "./pages/landing-page/components/RecipeDetails";
+import CategoriesPage from "./pages/categories-page/CategoriesPage";
+import RecipeList from "./pages/categories-page/components/RecipeList";
+
+import store from "./store";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Nav />
+        <Route exact path="/" component={LandingPage} />
+        <Route path="/:id" component={RecipeDetails} />
+        <Route exact path="/" component={CategoriesPage} />
+        <Route path="/:id" component={RecipeList} />
+      </BrowserRouter>
+    </Provider>
   );
 }
 
