@@ -18,7 +18,8 @@ const initialState = {
   suggestions: [],
   categories: [],
   categorie: "",
-  listRecipe: []
+  listRecipe: [],
+  favouritesRecipes: []
 };
 
 export default function(state = initialState, action) {
@@ -64,7 +65,8 @@ export default function(state = initialState, action) {
     case TEXT_INPUT:
       return {
         ...state,
-        categorie: action.payload
+        text: action.payload,
+        suggestions: []
       };
     case LOADING:
       return {

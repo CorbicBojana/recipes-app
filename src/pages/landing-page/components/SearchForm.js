@@ -19,8 +19,9 @@ import {
 
 function SearchForm(props) {
   const handleChange = e => {
-    props.searchRecipe(e.target.value);
-    props.fetchAutocompleteRecipes(e.target.value);
+    const value = e.target.value;
+    props.searchRecipe(value);
+    props.fetchAutocompleteRecipes(value);
   };
 
   const handleSubmit = e => {
@@ -30,13 +31,12 @@ function SearchForm(props) {
   };
 
   const handleClick = e => {
-    console.log(e.target.textContent);
     props.textInput(e.target.textContent);
   };
 
   let content = props.suggestions?.map((recipe, index) => (
-    <List component="nav" key={index} onClick={handleClick}>
-      <ListItem button>
+    <List component="nav" key={index}>
+      <ListItem button onClick={handleClick}>
         <ListItemText primary={recipe.strMeal} />
       </ListItem>
     </List>
@@ -50,6 +50,7 @@ function SearchForm(props) {
           label="Search for recipes"
           type="text"
           name="searchText"
+          value={props.text}
           onChange={handleChange}
           fullWidth={true}
           style={{ marginTop: 40, fontSize: 40 }}

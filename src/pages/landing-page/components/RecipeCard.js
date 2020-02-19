@@ -47,7 +47,7 @@ function RecipeCard(props) {
                   alt={recipe.strMeal}
                   className={classes.image}
                 />
-                {recipe.strMeal}
+                <h2>{recipe.strMeal}</h2>
               </Paper>
             </Link>
           </Grid>

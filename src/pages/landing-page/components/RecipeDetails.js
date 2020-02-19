@@ -41,8 +41,27 @@ function RecipeDetails(props) {
 
   const classes = useStyles();
 
+  const handleClick = () => {
+    const oldInput =
+      JSON.parse(localStorage.getItem("favourites_recipes")) || [];
+
+    let { recipe, favouritesRecipes } = props;
+
+    const newInput = {
+      ...recipe
+    };
+
+    oldInput.push(newInput);
+
+    localStorage.setItem("favourites_recipes", JSON.stringify(oldInput));
+
+    favouritesRecipes = JSON.parse(localStorage.getItem("favourites_recipes"));
+    console.log(favouritesRecipes);
+  };
+
   return (
     <div className={classes.root}>
+      {console.log(props.favouritesRecipes)}
       {props.recipe.meals?.map((meal, index) => (
         <Paper className={classes.paper} key={index}>
           <Grid container spacing={2}>
@@ -81,6 +100,17 @@ function RecipeDetails(props) {
                     </Button>
                   </Typography>
                 </Grid>
+                <Grid item>
+                  <Typography variant="body2" style={{ cursor: "pointer" }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleClick}
+                    >
+                      Add to favourites
+                    </Button>
+                  </Typography>
+                </Grid>
               </Grid>
               <Grid item>
                 <Typography variant="subtitle1">{meal.strArea}</Typography>
@@ -94,7 +124,8 @@ function RecipeDetails(props) {
 }
 
 const mapStateToProps = state => ({
-  recipe: state.recipes.recipe
+  recipe: state.recipes.recipe,
+  favouritesRecipes: state.recipes.favouritesRecipes
 });
 
 export default connect(mapStateToProps, { fetchRecipe })(RecipeDetails);
