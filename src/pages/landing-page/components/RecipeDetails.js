@@ -61,7 +61,6 @@ function RecipeDetails(props) {
 
   return (
     <div className={classes.root}>
-      {console.log(props.favouritesRecipes)}
       {props.recipe.meals?.map((meal, index) => (
         <Paper className={classes.paper} key={index}>
           <Grid container spacing={2}>
