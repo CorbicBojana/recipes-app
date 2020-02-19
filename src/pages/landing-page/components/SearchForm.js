@@ -43,8 +43,8 @@ function SearchForm(props) {
   ));
 
   return (
-    <Container maxWidth="sm">
-      <form onSubmit={handleSubmit}>
+    <Container maxWidth="md">
+      <form onSubmit={handleSubmit} style={{ margin: "40px 0" }}>
         <TextField
           id="standard-basic"
           label="Search for recipes"
@@ -58,7 +58,7 @@ function SearchForm(props) {
         <Button
           variant="outlined"
           type="submit"
-          style={{ display: "block", marginTop: 20 }}
+          style={{ display: "block", marginTop: 20, padding: " 10px 80px" }}
         >
           Search
         </Button>

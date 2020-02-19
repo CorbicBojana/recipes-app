@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Paper, ButtonBase, Typography } from "@material-ui/core";
+import { ButtonBase, Typography, Container } from "@material-ui/core";
 
 import {
   fetchCategoriesMeal,
@@ -65,7 +65,8 @@ function CategoriesPage(props) {
       top: 0,
       bottom: 0,
       backgroundSize: "cover",
-      backgroundPosition: "center 40%"
+      backgroundPosition: "center 40%",
+      margin: 20
     },
     imageBackdrop: {
       position: "absolute",
@@ -75,12 +76,14 @@ function CategoriesPage(props) {
       bottom: 0,
       backgroundColor: theme.palette.common.black,
       opacity: 0.4,
-      transition: theme.transitions.create("opacity")
+      transition: theme.transitions.create("opacity"),
+      margin: 20
     },
     imageTitle: {
       position: "relative",
       padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) +
-        6}px`
+        6}px`,
+      backgroundColor: "#f7f7f7"
     },
     imageMarked: {
       height: 3,
@@ -102,7 +105,7 @@ function CategoriesPage(props) {
       className={classes.image}
       focusVisibleClassName={classes.focusVisible}
       style={{
-        width: "30%"
+        width: "33%"
       }}
     >
       <span
@@ -113,20 +116,46 @@ function CategoriesPage(props) {
       />
       <span className={classes.imageBackdrop} />
       <span className={classes.imageButton}>
-        <Typography
-          component="span"
-          variant="subtitle1"
-          color="inherit"
-          className={classes.imageTitle}
+        <Link
+          to={`/RecipeList/${categorie.idCategory}`}
+          style={{
+            textTransform: "uppercase",
+            textDecoration: "none",
+            fontWeight: 700
+          }}
         >
-          {categorie.strCategory}
-          <span className={classes.imageMarked} />
-        </Typography>
+          <Typography
+            component="span"
+            variant="subtitle1"
+            className={classes.imageTitle}
+            onClick={handleClick}
+          >
+            {categorie.strCategory}
+            <span className={classes.imageMarked} />
+          </Typography>
+        </Link>
       </span>
     </ButtonBase>
   ));
 
-  return <div className={classes.root}>{content}</div>;
+  return (
+    <div className={classes.root}>
+      <Container maxWidth="md">
+        <h2
+          style={{
+            textAlign: "center",
+            fontSize: 34,
+            fontWeight: 700,
+            textTransform: "uppercase",
+            margin: "40px 0 20px"
+          }}
+        >
+          Categories Recipe
+        </h2>
+        {content}
+      </Container>
+    </div>
+  );
 }
 
 const mapStateToProps = state => ({

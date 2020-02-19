@@ -14,11 +14,13 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Nav />
-        <Route exact path="/" component={LandingPage} />
-        <Route path="/:id" component={RecipeDetails} />
-        <Route exact path="/" component={CategoriesPage} />
-        <Route path="/:id" component={RecipeList} />
+        <>
+          <Nav />
+          <Route exact path="/" component={LandingPage} />
+          <Route path="/:id" component={RecipeDetails} />
+          <Route exact path="/" component={CategoriesPage} />
+          <Route path="/RecipeList/:id" component={RecipeList} />
+        </>
       </BrowserRouter>
     </Provider>
   );
