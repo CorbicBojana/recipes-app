@@ -51,6 +51,7 @@ function SearchForm(props) {
           type="text"
           name="searchText"
           onChange={handleChange}
+          fullWidth={true}
           style={{ marginTop: 40, fontSize: 40 }}
         />
         {content}
