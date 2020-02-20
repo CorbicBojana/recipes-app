@@ -6,7 +6,7 @@ import { Grid, Paper, Typography, Button, ButtonBase } from "@material-ui/core";
 
 import {
   fetchRecipe,
-  getFavouritesRecipes
+  isAddToFavouritesRecipes
 } from "../../../actions/rootActions";
 
 function RecipeDetails(props) {
@@ -59,6 +59,7 @@ function RecipeDetails(props) {
     oldInput.push(newInput);
 
     localStorage.setItem("favourites_recipes", JSON.stringify(oldInput));
+    props.isAddToFavouritesRecipes();
   };
 
   return (
@@ -103,13 +104,17 @@ function RecipeDetails(props) {
                 </Grid>
                 <Grid item>
                   <Typography variant="body2" style={{ cursor: "pointer" }}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleClick}
-                    >
-                      Add to favourites
-                    </Button>
+                    {props.addToFavouritesRecipes ? (
+                      <>You add recipe to favourites</>
+                    ) : (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleClick}
+                      >
+                        Add to favourites
+                      </Button>
+                    )}
                   </Typography>
                 </Grid>
               </Grid>
@@ -126,9 +131,11 @@ function RecipeDetails(props) {
 
 const mapStateToProps = state => ({
   recipe: state.recipes.recipe,
-  favouritesRecipes: state.recipes.favouritesRecipes
+  favouritesRecipes: state.recipes.favouritesRecipes,
+  addToFavouritesRecipes: state.recipes.addToFavouritesRecipes
 });
 
-export default connect(mapStateToProps, { fetchRecipe, getFavouritesRecipes })(
-  RecipeDetails
-);
+export default connect(mapStateToProps, {
+  fetchRecipe,
+  isAddToFavouritesRecipes
+})(RecipeDetails);

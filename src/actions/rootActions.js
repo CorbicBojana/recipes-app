@@ -9,7 +9,8 @@ import {
   FETCH_CATEGORIE_LIST_RECIPE,
   CATEGORIE_INPUT,
   CLEAR_SEARCH,
-  GET_FAVOURITES_RECIPES
+  GET_FAVOURITES_RECIPES,
+  IS_ADD_TO_FAVOURITES_RECIPES
 } from "./types";
 
 import instance from "../axios";
@@ -105,6 +106,12 @@ export const getFavouritesRecipes = favouritesRecipes => {
   return {
     type: GET_FAVOURITES_RECIPES,
     payload: favouritesRecipes
+  };
+};
+
+export const isAddToFavouritesRecipes = () => {
+  return {
+    type: IS_ADD_TO_FAVOURITES_RECIPES
   };
 };
 

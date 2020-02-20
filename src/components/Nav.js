@@ -17,6 +17,20 @@ function Nav() {
         <Link to="/" style={{ display: "inline-block" }}>
           <img src={logo} alt="logo" style={style} />
         </Link>
+        <Link to="/FavouritesPage">
+          <span
+            style={{
+              fontSize: 24,
+              textTransform: "uppercase",
+              color: "#f7f7f7",
+              position: "absolute",
+              top: "45%",
+              right: "10%"
+            }}
+          >
+            Favourites Recipes
+          </span>
+        </Link>
       </Container>
     </AppBar>
   );

@@ -1,61 +1,64 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  TextField,
-  Button,
-  Container,
-  List,
-  ListItem,
-  ListItemText
-} from "@material-ui/core";
+import { TextField, Button, Container } from "@material-ui/core";
+
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
 import {
   searchRecipe,
   fetchRecipes,
   setLoading,
   fetchAutocompleteRecipes,
-  textInput
+  textInput,
+  clearSearch
 } from "../../../actions/rootActions";
 
 function SearchForm(props) {
   const handleChange = e => {
     const value = e.target.value;
-    props.searchRecipe(value);
-    props.fetchAutocompleteRecipes(value);
+    if (value === "") {
+      props.clearSearch();
+    } else {
+      props.searchRecipe(value);
+      props.fetchAutocompleteRecipes(value);
+    }
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.fetchRecipes(props.text);
-    props.setLoading();
+    if (props.text !== "") {
+      props.fetchRecipes(props.text);
+      props.setLoading();
+    }
   };
 
   const handleClick = e => {
     props.textInput(e.target.textContent);
   };
 
-  let content = props.suggestions?.map((recipe, index) => (
-    <List component="nav" key={index}>
-      <ListItem button onClick={handleClick}>
-        <ListItemText primary={recipe.strMeal} />
-      </ListItem>
-    </List>
-  ));
-
   return (
     <Container maxWidth="md">
       <form onSubmit={handleSubmit} style={{ margin: "40px 0" }}>
-        <TextField
-          id="standard-basic"
-          label="Search for recipes"
-          type="text"
-          name="searchText"
-          value={props.text}
-          onChange={handleChange}
-          fullWidth={true}
-          style={{ marginTop: 40, fontSize: 40 }}
+        <Autocomplete
+          id="combo-box-demo"
+          options={props.suggestions}
+          getOptionLabel={option => option.strMeal}
+          style={{ width: "100%" }}
+          onClick={handleClick}
+          renderInput={params => (
+            <TextField
+              {...params}
+              id="standard-basic"
+              label="Search for recipes"
+              type="text"
+              name="searchText"
+              value={props.text}
+              onChange={handleChange}
+              fullWidth={true}
+              style={{ marginTop: 40, fontSize: 40 }}
+            />
+          )}
         />
-        {content}
         <Button
           variant="outlined"
           type="submit"
@@ -79,5 +82,6 @@ export default connect(mapStateToProps, {
   fetchRecipes,
   setLoading,
   fetchAutocompleteRecipes,
-  textInput
+  textInput,
+  clearSearch
 })(SearchForm);

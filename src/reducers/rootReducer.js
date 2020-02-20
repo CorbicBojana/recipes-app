@@ -9,7 +9,8 @@ import {
   TEXT_INPUT,
   CATEGORIE_INPUT,
   CLEAR_SEARCH,
-  GET_FAVOURITES_RECIPES
+  GET_FAVOURITES_RECIPES,
+  IS_ADD_TO_FAVOURITES_RECIPES
 } from "../actions/types";
 
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
   categories: [],
   categorie: "",
   listRecipe: [],
-  favouritesRecipes: []
+  favouritesRecipes: [],
+  addToFavouritesRecipes: false
 };
 
 export default function(state = initialState, action) {
@@ -74,12 +76,18 @@ export default function(state = initialState, action) {
       return {
         ...state,
         recipes: [],
-        text: ""
+        text: "",
+        suggestions: []
       };
     case GET_FAVOURITES_RECIPES:
       return {
         ...state,
         favouritesRecipes: action.payload
+      };
+    case IS_ADD_TO_FAVOURITES_RECIPES:
+      return {
+        ...state,
+        addToFavouritesRecipes: true
       };
     case LOADING:
       return {

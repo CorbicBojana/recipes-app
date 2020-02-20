@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Nav from "./components/Nav";
 import LandingPage from "./pages/landing-page/LandingPage";
@@ -15,14 +15,23 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <>
-          <Nav />
-          <Route exact path="/" component={LandingPage} />
-          <Route path="/:id" component={RecipeDetails} />
-          <Route exact path="/" component={CategoriesPage} />
-          <Route path="/RecipeList/:id" component={RecipeList} />
-          <Route exact path="/" component={FavouritesPage} />
-        </>
+        <Nav />
+
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <>
+                <LandingPage />
+                <CategoriesPage />
+              </>
+            )}
+          />
+          <Route exact path="/RecipeList/:id" component={RecipeList} />
+          <Route exact path="/FavouritesPage" component={FavouritesPage} />
+          <Route exact path="/:id" component={RecipeDetails} />
+        </Switch>
       </BrowserRouter>
     </Provider>
   );
