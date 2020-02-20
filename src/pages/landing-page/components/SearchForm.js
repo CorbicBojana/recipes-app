@@ -41,7 +41,7 @@ function SearchForm(props) {
       <form onSubmit={handleSubmit} style={{ margin: "40px 0" }}>
         <Autocomplete
           id="combo-box-demo"
-          options={props.suggestions}
+          options={props.suggestions === null ? "" : props.suggestions}
           getOptionLabel={option => option.strMeal}
           style={{ width: "100%" }}
           onClick={handleClick}
