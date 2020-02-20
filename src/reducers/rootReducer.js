@@ -7,7 +7,9 @@ import {
   FETCH_CATEGORIES_MEAL,
   FETCH_CATEGORIE_LIST_RECIPE,
   TEXT_INPUT,
-  CATEGORIE_INPUT
+  CATEGORIE_INPUT,
+  CLEAR_SEARCH,
+  GET_FAVOURITES_RECIPES
 } from "../actions/types";
 
 const initialState = {
@@ -67,6 +69,17 @@ export default function(state = initialState, action) {
         ...state,
         text: action.payload,
         suggestions: []
+      };
+    case CLEAR_SEARCH:
+      return {
+        ...state,
+        recipes: [],
+        text: ""
+      };
+    case GET_FAVOURITES_RECIPES:
+      return {
+        ...state,
+        favouritesRecipes: action.payload
       };
     case LOADING:
       return {

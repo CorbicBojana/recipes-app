@@ -150,7 +150,7 @@ function CategoriesPage(props) {
             margin: "40px 0 20px"
           }}
         >
-          Categories Recipe
+          Categories Recipes
         </h2>
         {content}
       </Container>

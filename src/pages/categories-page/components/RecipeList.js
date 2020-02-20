@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Paper, Typography, Button, ButtonBase } from "@material-ui/core";
+import { Grid, Paper, Typography, ButtonBase } from "@material-ui/core";
 
 import { fetchCategorieListRecipe } from "../../../actions/rootActions";
 

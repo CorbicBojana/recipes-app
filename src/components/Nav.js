@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, AppBar, Container } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { AppBar, Container } from "@material-ui/core";
 
 import logo from "../cook.svg";
 
@@ -13,7 +14,7 @@ function Nav() {
   return (
     <AppBar position="static">
       <Container maxWidth="md">
-        <Link to="/">
+        <Link to="/" style={{ display: "inline-block" }}>
           <img src={logo} alt="logo" style={style} />
         </Link>
       </Container>

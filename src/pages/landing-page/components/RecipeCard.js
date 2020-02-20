@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper } from "@material-ui/core";
 
+import { connect } from "react-redux";
+import { clearSearch } from "../../../actions/rootActions";
+
 function RecipeCard(props) {
   const { recipe } = props;
 
@@ -28,6 +31,10 @@ function RecipeCard(props) {
 
   const classes = useStyles();
 
+  const handleClick = () => {
+    props.clearSearch();
+  };
+
   return (
     <Grid container className={classes.root} spacing={6}>
       <Grid item xs={12}>
@@ -40,6 +47,7 @@ function RecipeCard(props) {
                 textAlign: "center",
                 fontWeight: 500
               }}
+              onClick={handleClick}
             >
               <Paper className={classes.paper}>
                 <img
@@ -57,4 +65,6 @@ function RecipeCard(props) {
   );
 }
 
-export default RecipeCard;
+const mapStateToProps = state => ({});
+
+export default connect(mapStateToProps, { clearSearch })(RecipeCard);

@@ -4,7 +4,10 @@ import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper, Typography, Button, ButtonBase } from "@material-ui/core";
 
-import { fetchRecipe } from "../../../actions/rootActions";
+import {
+  fetchRecipe,
+  getFavouritesRecipes
+} from "../../../actions/rootActions";
 
 function RecipeDetails(props) {
   useEffect(() => {
@@ -45,18 +48,17 @@ function RecipeDetails(props) {
     const oldInput =
       JSON.parse(localStorage.getItem("favourites_recipes")) || [];
 
-    let { recipe, favouritesRecipes } = props;
+    let { recipe } = props;
+
+    let newRecipe = recipe.meals[0];
 
     const newInput = {
-      ...recipe
+      ...newRecipe
     };
 
     oldInput.push(newInput);
 
     localStorage.setItem("favourites_recipes", JSON.stringify(oldInput));
-
-    favouritesRecipes = JSON.parse(localStorage.getItem("favourites_recipes"));
-    console.log(favouritesRecipes);
   };
 
   return (
@@ -127,4 +129,6 @@ const mapStateToProps = state => ({
   favouritesRecipes: state.recipes.favouritesRecipes
 });
 
-export default connect(mapStateToProps, { fetchRecipe })(RecipeDetails);
+export default connect(mapStateToProps, { fetchRecipe, getFavouritesRecipes })(
+  RecipeDetails
+);
