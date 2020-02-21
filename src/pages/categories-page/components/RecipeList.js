@@ -6,38 +6,38 @@ import { Grid, Paper, Typography, ButtonBase } from "@material-ui/core";
 
 import { fetchCategorieListRecipe } from "../../../actions/rootActions";
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    paddingTop: 40,
+    paddingBottom: 40
+  },
+  paper: {
+    padding: theme.spacing(2),
+    margin: "20px auto",
+    maxWidth: 500
+  },
+  typography: {
+    fontSize: 38,
+    fontWeight: 700,
+    textTransform: "uppercase"
+  },
+  image: {
+    width: 128,
+    height: 128
+  },
+  img: {
+    margin: "auto",
+    display: "block",
+    maxWidth: "100%",
+    maxHeight: "100%"
+  }
+}));
+
 function RecipeList(props) {
   useEffect(() => {
     props.fetchCategorieListRecipe(props.categorie);
   }, []);
-
-  const useStyles = makeStyles(theme => ({
-    root: {
-      flexGrow: 1,
-      paddingTop: 40,
-      paddingBottom: 40
-    },
-    paper: {
-      padding: theme.spacing(2),
-      margin: "20px auto",
-      maxWidth: 500
-    },
-    typography: {
-      fontSize: 38,
-      fontWeight: 700,
-      textTransform: "uppercase"
-    },
-    image: {
-      width: 128,
-      height: 128
-    },
-    img: {
-      margin: "auto",
-      display: "block",
-      maxWidth: "100%",
-      maxHeight: "100%"
-    }
-  }));
 
   const classes = useStyles();
 

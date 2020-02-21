@@ -32,7 +32,7 @@ function SearchForm(props) {
     }
   };
 
-  const handleClick = e => {
+  const handleAutocompleteChange = e => {
     props.textInput(e.target.textContent);
   };
 
@@ -41,10 +41,10 @@ function SearchForm(props) {
       <form onSubmit={handleSubmit} style={{ margin: "40px 0" }}>
         <Autocomplete
           id="combo-box-demo"
-          options={props.suggestions === null ? "" : props.suggestions}
+          options={props.suggestions}
           getOptionLabel={option => option.strMeal}
+          onChange={handleAutocompleteChange}
           style={{ width: "100%" }}
-          onClick={handleClick}
           renderInput={params => (
             <TextField
               {...params}
@@ -56,7 +56,7 @@ function SearchForm(props) {
               onChange={handleChange}
               fullWidth={true}
               style={{ marginTop: 40, fontSize: 40 }}
-            />
+            ></TextField>
           )}
         />
         <Button

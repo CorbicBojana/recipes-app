@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import { getFavouritesRecipes } from "../../actions/rootActions";
@@ -13,12 +13,6 @@ import {
 } from "@material-ui/core";
 
 function RecipeList(props) {
-  useEffect(() => {
-    props.getFavouritesRecipes(
-      JSON.parse(localStorage.getItem("favourites_recipes"))
-    );
-  }, []);
-
   const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1,
