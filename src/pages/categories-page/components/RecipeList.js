@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -43,30 +44,39 @@ function RecipeList(props) {
 
   let content = props.listRecipe?.map((recipe, index) => (
     <Paper className={classes.paper} key={index}>
-      <Grid container spacing={2}>
-        <Grid item>
-          <ButtonBase className={classes.image}>
-            <img
-              className={classes.img}
-              alt="complex"
-              src={recipe.strMealThumb}
-            />
-          </ButtonBase>
-        </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
-            <Grid item xs>
-              <Typography
-                gutterBottom
-                variant="subtitle1"
-                className={classes.typography}
-              >
-                {recipe.strMeal}
-              </Typography>
+      <Link
+        to={`/${recipe.idMeal}`}
+        style={{
+          textDecoration: "none",
+          textAlign: "center",
+          fontWeight: 500
+        }}
+      >
+        <Grid container spacing={2}>
+          <Grid item>
+            <ButtonBase className={classes.image}>
+              <img
+                className={classes.img}
+                alt="complex"
+                src={recipe.strMealThumb}
+              />
+            </ButtonBase>
+          </Grid>
+          <Grid item xs={12} sm container>
+            <Grid item xs container direction="column" spacing={2}>
+              <Grid item xs>
+                <Typography
+                  gutterBottom
+                  variant="subtitle1"
+                  className={classes.typography}
+                >
+                  {recipe.strMeal}
+                </Typography>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </Link>
     </Paper>
   ));
 
@@ -75,7 +85,8 @@ function RecipeList(props) {
 
 const mapStateToProps = state => ({
   categorie: state.recipes.categorie,
-  listRecipe: state.recipes.listRecipe
+  listRecipe: state.recipes.listRecipe,
+  recipe: state.recipes.recipe
 });
 
 export default connect(mapStateToProps, { fetchCategorieListRecipe })(
