@@ -45,20 +45,28 @@ function RecipeDetails(props) {
   const classes = useStyles();
 
   const handleClick = () => {
-    const oldInput =
+    const oldLocalStorageRecipe =
       JSON.parse(localStorage.getItem("favourites_recipes")) || [];
 
     let { recipe } = props;
 
     let newRecipe = recipe.meals[0];
 
-    const newInput = {
+    const newLocalStorageRecipe = {
       ...newRecipe
     };
 
-    oldInput.push(newInput);
+    const localStorageRecipe = element =>
+      element.strMeal == recipe.meals[0].strMeal;
 
-    localStorage.setItem("favourites_recipes", JSON.stringify(oldInput));
+    if (oldLocalStorageRecipe.findIndex(localStorageRecipe) === -1) {
+      oldLocalStorageRecipe.push(newLocalStorageRecipe);
+
+      localStorage.setItem(
+        "favourites_recipes",
+        JSON.stringify(oldLocalStorageRecipe)
+      );
+    }
 
     props.getFavouritesRecipes(
       JSON.parse(localStorage.getItem("favourites_recipes"))
@@ -70,7 +78,7 @@ function RecipeDetails(props) {
     if (recipe.meals) {
       const meal = recipe.meals[0];
       console.log({ recipe }, favouritesRecipes);
-      return !!favouritesRecipes.find(r => r.idMeal == meal.idMeal);
+      return !!favouritesRecipes.find(r => r.idMeal === meal.idMeal);
     }
     return false;
   });
